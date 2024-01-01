@@ -126,4 +126,21 @@ class BstSpec extends FlatSpec {
     assert(bst.inorderString === expectedInorder)
   }
 
+  it should "not fail for operations on empty tree" in {
+    val bst = new Bst[String, Int]
+
+    assert(bst.size === 0)
+    assert(bst.min === None)
+    assert(bst.max === None)
+    assert(bst.inorderString === "")
+    assert(bst.find("foo") === None)
+
+    bst.delete("foo")
+    assert(bst.inorderString === "")
+    bst.insert("foo", 8)
+    assert(bst.inorderString === "(foo, 8)")
+    bst.delete("foo")
+    assert(bst.inorderString === "")
+  }
+
 }
